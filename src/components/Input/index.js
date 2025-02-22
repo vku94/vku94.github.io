@@ -2,7 +2,7 @@ import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import '../../styles/Input.css'
 
-function Input({ label }) {
+function Input({ onInput, label, placeholder }) {
     const [focused, setFocused] = useState(false)
 
     return (
@@ -12,10 +12,11 @@ function Input({ label }) {
             )}
             <input
                 type="text"
-                placeholder="Enter your secret..."
+                placeholder={placeholder}
                 className={`bdsm-input ${focused ? "focused" : ""}`}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
+                onInput={(e) => onInput(e.target.value)}
             />
         </div>
     );

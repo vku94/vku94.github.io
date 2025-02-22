@@ -4,6 +4,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+body, .app, .root {
+  min-height: 100vh;
+}
+
 .app {
   text-align: center;
 }
@@ -27,16 +31,36 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.intro {
+.screen {
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: large;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
 }
 
 .input-control {
   display: flex;
   justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.version {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #992111;
+  user-select: none;
+}
+
+
+.list-container {
+  display: flex;
   gap: 20px;
   flex-wrap: wrap;
   padding: 0 20px;

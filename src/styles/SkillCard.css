@@ -1,0 +1,36 @@
+.bdsm-skill-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(145deg, #0d0d0d, #222);
+    border: 2px solid #550011;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(255, 0, 51, 0.2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.bdsm-skill-card.hovered {
+    border-color: #7a0019;
+    box-shadow: 0 0 15px #7a0019;
+    transform: scale(1.05);
+}
+
+.skill-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    border: 2px solid #7a0019;
+    box-shadow: 0 0 10px #7a0019;
+}
+
+.skill-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #7a0019;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

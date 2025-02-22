@@ -9,13 +9,14 @@
    "type": "module",
    "scripts": {
       "dev": "cp templates/index.html index.html && preact-scripts start",
-      "build": "cp templates/index.html index.html && preact-scripts build && cp -r build/* ."
+      "build": "rm -r static && cp templates/index.html index.html && preact-scripts build && cp -r build/* ."
    },
    "engines": {
       "node": "20.18.2",
       "npm": "10.8.2"
    },
    "dependencies": {
+      "lodash": "^4.17.21",
       "preact": "^10.26.2"
    },
    "devDependencies": {
