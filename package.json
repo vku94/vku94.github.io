@@ -1,6 +1,6 @@
 {
    "name": "MRT-note-creator",
-   "version": "1.0.0",
+   "version": "0.0.1",
    "description": "",
    "keywords": [],
    "license": "ISC",
@@ -8,8 +8,21 @@
    "main": "index.js",
    "type": "module",
    "scripts": {
-      "start": "node ./index.js"
+      "dev": "cp templates/index.html index.html && preact-scripts start",
+      "build": "cp templates/index.html index.html && preact-scripts build && cp -r build/* ."
    },
-   "dependencies": {},
-   "devDependencies": {}
+   "engines": {
+      "node": "20.18.2",
+      "npm": "10.8.2"
+   },
+   "dependencies": {
+      "preact": "^10.26.2"
+   },
+   "devDependencies": {
+      "file-loader": "^6.2.0",
+      "preact-scripts": "0.3.0-alpha"
+   },
+   "eslintConfig": {
+      "extends": "./node_modules/preact-scripts/config/eslint.js"
+   }
 }

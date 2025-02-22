@@ -1,0 +1,33 @@
+.bdsm-button {
+    background: linear-gradient(145deg, #111, #222);
+    color: #e0e0e0;
+    border: 2px solid #550011;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(255, 0, 51, 0.2);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    flex: 1;
+    white-space: nowrap;
+}
+
+.bdsm-button:hover {
+    border-color: #7a0019;
+    box-shadow: 0 0 15px #7a0019;
+    transform: scale(1.05);
+}
+
+.bdsm-button.active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 10px rgba(255, 0, 51, 0.5);
+}
+
+.bdsm-button:hover::before {
+    opacity: 0.3;
+}
