@@ -2,12 +2,12 @@ import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import '../../styles/SkillCard.css'
 
-function SkillCard({ name, classImage, onClick }) {
+function SkillCard({ name, classImage, onClick, selected }) {
     const [hovered, setHovered] = useState(false)
 
     return (
         <div
-            className={`bdsm-skill-card ${hovered ? "hovered" : ""}`}
+            className={`bdsm-skill-card ${hovered ? "hovered" : ""} ${selected ? "selected" : ""}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onClick={onClick}

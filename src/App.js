@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact'
 import { useCallback, useContext } from 'preact/hooks'
 import Loader from './components/Loader'
 import AppContext, { AppProvider } from './providers/appProvider'
-import { InitStep, PlayersSelection, SkillsSelection } from './screens'
+import { InitStep, PlayersSelection, SkillsSelection, Note } from './screens'
 import getReportCastsQuery from './api/graphqlQueries/reportCasts'
 import parseUrl from './utils/parseUrl'
 import query from './api/query'
@@ -11,7 +11,15 @@ import './styles/index.css'
 
 // todo: no error handling, fuck it :D
 function Main () {
-    const { isLoading, setIsLoading, currentScreen, setCurrentScreen, setReportRawData, setSelectedPlayer } = useContext(AppContext)
+    const {
+        isLoading,
+        setIsLoading,
+        currentScreen,
+        setCurrentScreen,
+        setReportRawData,
+        setSelectedPlayer,
+        setSelectedSkills
+    } = useContext(AppContext)
 
     const getReportInfo = useCallback(async (reportUrl) => {
         setIsLoading(true)
@@ -30,6 +38,13 @@ function Main () {
         setIsLoading(false)
     }, [])
 
+    const selectSkills = useCallback((skills) => {
+        setIsLoading(true)
+        setSelectedSkills(skills)
+        setCurrentScreen(SCREEN.NOTE_PAGE)
+        setIsLoading(false)
+    }, [])
+
     return (
         <Fragment>
             {isLoading && <Loader/>}
@@ -43,7 +58,7 @@ function Main () {
                     switch (currentScreen) {
                         case SCREEN.INIT: {
                             return (
-                                <InitStep handleNextStepNav={getReportInfo}/>
+                                <InitStep handleNextStepNav={getReportInfo} />
                             )
                         }
                         case SCREEN.PLAYER_SELECT: {
@@ -53,8 +68,16 @@ function Main () {
                         }
                         case SCREEN.SKILLS_SELECT: {
                             return (
-                                <SkillsSelection handleNextStepNav={() => null} />
+                                <SkillsSelection handleNextStepNav={selectSkills} />
                             )
+                        }
+                        case SCREEN.NOTE_PAGE: {
+                            return (
+                                <Note />
+                            )
+                        }
+                        default: {
+                            return null
                         }
                     }
                 }

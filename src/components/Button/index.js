@@ -2,7 +2,7 @@ import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import '../../styles/Button.css'
 
-function Button({ label, onClick }) {
+function Button({ label, onClick, disabled }) {
     const [pressed, setPressed] = useState(false)
     return (
         <button
@@ -10,6 +10,7 @@ function Button({ label, onClick }) {
             onClick={onClick}
             onMouseDown={() => setPressed(true)}
             onMouseUp={() => setPressed(false)}
+            disabled={disabled}
         >
             {label}
         </button>

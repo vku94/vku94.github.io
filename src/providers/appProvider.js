@@ -6,7 +6,8 @@ const defaultContext = {
     isLoading: false,
     currentScreen: SCREEN.INIT,
     selectedPlayer: null,
-    reportRawData: null
+    reportRawData: null,
+    selectedSkills: []
 }
 
 const AppContext = createContext(defaultContext)
@@ -16,6 +17,7 @@ export const AppProvider = ({ children }) => {
     const [selectedPlayer, setSelectedPlayer] = useState(defaultContext.selectedPlayer)
     const [currentScreen, setCurrentScreen] = useState(defaultContext.currentScreen)
     const [reportRawData, setReportRawData] = useState(defaultContext.reportRawData)
+    const [selectedSkills, setSelectedSkills] = useState(defaultContext.selectedSkills)
 
     return (
         <AppContext.Provider value={{
@@ -26,7 +28,9 @@ export const AppProvider = ({ children }) => {
             currentScreen,
             setCurrentScreen,
             reportRawData,
-            setReportRawData
+            setReportRawData,
+            selectedSkills,
+            setSelectedSkills
         }}>
             {children}
         </AppContext.Provider>

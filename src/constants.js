@@ -1,7 +1,8 @@
 export const SCREEN = {
     'INIT': 0,
     'PLAYER_SELECT': 1,
-    'SKILLS_SELECT': 2
+    'SKILLS_SELECT': 2,
+    'NOTE_PAGE': 3,
 }
 
 export const SPEC_ICON_MAP = {

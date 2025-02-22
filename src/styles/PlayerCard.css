@@ -25,6 +25,7 @@
     border-radius: 8px;
     border: 2px solid #7a0019;
     box-shadow: 0 0 10px #7a0019;
+    user-select: none;
 }
 
 .player-name {
@@ -33,4 +34,5 @@
     color: #7a0019;
     text-transform: uppercase;
     letter-spacing: 2px;
+    user-select: none;
 }
