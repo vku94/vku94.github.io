@@ -1,0 +1,15 @@
+{
+   "name": "MRT-note-creator",
+   "version": "1.0.0",
+   "description": "",
+   "keywords": [],
+   "license": "ISC",
+   "author": "vku@dbbsoftware.com",
+   "main": "index.js",
+   "type": "module",
+   "scripts": {
+      "start": "node ./index.js"
+   },
+   "dependencies": {},
+   "devDependencies": {}
+}
