@@ -9,13 +9,15 @@ export default function (data, playerId) {
 
     return {
         startTime,
-        casts: playerCasts.map(({ abilityGameID, timestamp }) => {
-            const skillInfo = skillsMeta.find((sm) => sm.gameID === abilityGameID)
-            return ({
-                guid: abilityGameID,
-                name: get(skillInfo, 'name', 'Unknown'),
-                timestamp
+        casts: playerCasts
+            .filter(f => f.type === 'cast')
+            .map(({ abilityGameID, timestamp }) => {
+                const skillInfo = skillsMeta.find((sm) => sm.gameID === abilityGameID)
+                return ({
+                    guid: abilityGameID,
+                    name: get(skillInfo, 'name', 'Unknown'),
+                    timestamp,
+                })
             })
-        })
     }
 }
