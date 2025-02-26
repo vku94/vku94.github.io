@@ -49,6 +49,14 @@ function Main () {
         <Fragment>
             {isLoading && <Loader/>}
             <div className="version">Ultra Alpha</div>
+            {currentScreen > 0 ? (
+                <button
+                    className="back-button"
+                    onClick={() => setCurrentScreen(currentScreen - 1)}
+                >
+                    &#x25c0;
+                </button>
+            ) : null}
             <div className="header">
                 <img src="/public/logo.webp" className="logo" alt="logo" />
                 <h2>All rights are not reserved</h2>

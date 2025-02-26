@@ -73,3 +73,17 @@ body, .app, .root {
   white-space: break-spaces;
   text-align: left;
 }
+
+.back-button {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  background: linear-gradient(135deg, #520000, #7a0019, #440055);
+  color: #ffffff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 999;
+}
