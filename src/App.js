@@ -1,9 +1,11 @@
 import { h, Fragment } from 'preact'
 import { useCallback, useContext } from 'preact/hooks'
+import _ from 'lodash'
 import Loader from './components/Loader'
 import AppContext, { AppProvider } from './providers/appProvider'
 import { InitStep, PlayersSelection, SkillsSelection, Note } from './screens'
 import getReportCastsQuery from './api/graphqlQueries/reportCasts'
+import getReportFightsQuery from './api/graphqlQueries/reportFights'
 import parseUrl from './utils/parseUrl'
 import query from './api/query'
 import { SCREEN } from './constants'
@@ -23,7 +25,18 @@ function Main () {
 
     const getReportInfo = useCallback(async (reportUrl) => {
         setIsLoading(true)
-        const { reportId, fightId } = parseUrl(reportUrl)
+        const { reportId, fightId: fId } = parseUrl(reportUrl)
+
+        let fightId = fId
+
+        if (fId === 'last') {
+            const q = getReportFightsQuery({ reportId })
+            const res = await query(q)
+            const fights = _.get(res, 'data.reportData.report.fights', [])
+            const lastFight = fights.at(-1) || {}
+            fightId = lastFight.id
+        }
+
         const q = getReportCastsQuery({ reportId, fightId })
         const res = await query(q)
         setReportRawData(res)

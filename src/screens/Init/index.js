@@ -11,8 +11,11 @@ function Init ({ handleNextStepNav }) {
     const onButtonClick = useCallback(() => handleNextStepNav(url), [url, handleNextStepNav])
 
     const buttonDisabled = useMemo(() => {
-        const regexp = new RegExp(/^https:\/\/www\.warcraftlogs\.com\/reports\/([A-Za-z0-9]+)\?fight=(\d+)*/)
-        const valid = regexp.test(url)
+        const domainValid = url.startsWith('https://www.warcraftlogs.com/reports/')
+        const fightValid = url.includes('fight=')
+
+        const valid = domainValid && fightValid
+
         return !valid
     }, [url])
 
