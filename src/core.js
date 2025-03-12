@@ -20,8 +20,9 @@ export const generateNote = (castsObj, playerName, whiteListedSkills) => {
     const sorted = casts.sort((a, b) => a.time - b.time)
 
     return sorted.reduce((p, c) => {
-        const timeParsed = convertSeconds(c.time)
-        const row = `{time:${timeParsed}} ${timeParsed} - |cff33937F${playerName}|r {spell:${c.skillId}}`
+        const timeParsed = convertSeconds(c.time, true)
+        const timeToShow = convertSeconds(c.time)
+        const row = `{time:${timeParsed}} ${timeToShow} - |cff33937F${playerName}|r {spell:${c.skillId}}`
         return p + row + '\n'
     }, '')
 }
