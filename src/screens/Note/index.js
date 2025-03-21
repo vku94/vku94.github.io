@@ -42,7 +42,7 @@ function Note () {
                 <pre ref={textRef} className="mrt-note-result" style={{ margin: '20px' }}>
                     {noteText}
                 </pre>
-                <div style={{ display: 'flex', flexDirection: 'column', margin: '20px 0', padding: '22px 0', gap: '0.055em' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', margin: '20px 0', padding: '22px 0', gap: '0.0556em' }}>
                     {casts.map(({ iconUrl }, key) => (
                         <img key={key} style={{ width: '1em', height: '1em' }} src={iconUrl} alt={''}/>
                     ))}
