@@ -1,22 +1,27 @@
 import { h } from 'preact'
-import {useCallback, useContext, useMemo, useRef, useState} from 'preact/hooks'
+import { useCallback, useContext, useMemo, useRef, useState } from 'preact/hooks'
 import AppContext from '../../providers/appProvider'
 import Error from '../../screens/Error'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import extractPlayerCasts from '../../transformers/extractPlayerCasts'
-import { generateNote } from '../../core'
+import { generateNote, getCasts } from '../../core'
 import copyToClipboard from '../../utils/copyToClipboard'
 
 function Note () {
     const textRef = useRef(null)
     const [customPlayerName, setCustomPlayerName] = useState('')
-    const { reportRawData, selectedSkills, selectedPlayer } = useContext(AppContext)
+    const { playerCastsRawData, selectedSkills, selectedPlayer } = useContext(AppContext)
 
     const noteText = useMemo(() => {
-        const castsObj = extractPlayerCasts(reportRawData, selectedPlayer.id)
+        const castsObj = extractPlayerCasts(playerCastsRawData, selectedPlayer.id)
         return generateNote(castsObj, customPlayerName || selectedPlayer.name, selectedSkills)
-    }, [reportRawData, selectedPlayer, selectedSkills, customPlayerName])
+    }, [playerCastsRawData, selectedPlayer, selectedSkills, customPlayerName])
+
+    const casts = useMemo(() => {
+        const castsObj = extractPlayerCasts(playerCastsRawData, selectedPlayer.id)
+        return getCasts(castsObj, selectedSkills)
+    }, [playerCastsRawData, selectedPlayer, selectedSkills])
 
     const handleCustomPlayerNameInput = useCallback((value) => {
         setCustomPlayerName(value)
@@ -33,9 +38,16 @@ function Note () {
             <div style={{ marginBottom: '20px', width: '300px' }}>
                 <Input label="Custom player name" placeholder="Enter your name buddy" onInput={handleCustomPlayerNameInput} />
             </div>
-            <pre ref={textRef} className="mrt-note-result" style={{ margin: '20px' }}>
-                {noteText}
-            </pre>
+            <div style={{ display: 'flex' }}>
+                <pre ref={textRef} className="mrt-note-result" style={{ margin: '20px' }}>
+                    {noteText}
+                </pre>
+                <div style={{ display: 'flex', flexDirection: 'column', margin: '20px 0', padding: '22px 0', gap: '0.055em' }}>
+                    {casts.map(({ iconUrl }, key) => (
+                        <img key={key} style={{ width: '1em', height: '1em' }} src={iconUrl} alt={''}/>
+                    ))}
+                </div>
+            </div>
             <div style={{ marginTop: '40px', marginBottom: '40px' }}>
                 <Button label={'Copy'} onClick={handleCopyToClipboard} />
             </div>

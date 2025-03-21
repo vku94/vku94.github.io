@@ -5,21 +5,25 @@ const transformCasts = (obj, whiteListedSkills) => {
     const startTime = obj.startTime
     const skills = obj.casts
 
-    skills.forEach(({ name, guid, timestamp }) => {
+    skills.forEach(({ name, guid, timestamp, iconUrl }) => {
         if (whiteListedSkills.includes(guid)) {
             const fightTime = (timestamp - startTime) / 1000
-            casts.push({ skillName: name, skillId: guid, time: fightTime })
+            casts.push({ skillName: name, skillId: guid, time: fightTime, iconUrl })
         }
     })
 
     return casts
 }
 
-export const generateNote = (castsObj, playerName, whiteListedSkills) => {
+export const getCasts = (castsObj, whiteListedSkills) => {
     const casts = transformCasts(castsObj, whiteListedSkills)
-    const sorted = casts.sort((a, b) => a.time - b.time)
+    return casts.sort((a, b) => a.time - b.time)
+}
 
-    return sorted.reduce((p, c) => {
+export const generateNote = (castsObj, playerName, whiteListedSkills) => {
+    const casts = getCasts(castsObj, whiteListedSkills)
+
+    return casts.reduce((p, c) => {
         const timeParsed = convertSeconds(c.time, true)
         const timeToShow = convertSeconds(c.time)
         const row = `{time:${timeParsed}} ${timeToShow} - |cff33937F${playerName}|r {spell:${c.skillId}}`

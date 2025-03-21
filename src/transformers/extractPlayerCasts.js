@@ -1,4 +1,5 @@
 import { get } from 'lodash'
+import getBlizzardIconUrl from '../utils/getBlizzardIconUrl'
 
 export default function (data, playerId) {
     // todo: enable optional chaining
@@ -17,6 +18,7 @@ export default function (data, playerId) {
                     guid: abilityGameID,
                     name: get(skillInfo, 'name', 'Unknown'),
                     timestamp,
+                    iconUrl: getBlizzardIconUrl(skillInfo.icon)
                 })
             })
     }

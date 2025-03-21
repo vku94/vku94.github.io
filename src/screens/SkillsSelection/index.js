@@ -5,11 +5,10 @@ import SkillCard from '../../components/SkillCard'
 import Error from '../../screens/Error'
 import { extractPlayerSkills } from '../../transformers'
 import Button from '../../components/Button'
-
-const getBlizzardIconUrl = (icon_name) => `https://render.worldofwarcraft.com/eu/icons/56/${icon_name}`
+import getBlizzardIconUrl from '../../utils/getBlizzardIconUrl'
 
 function SkillsSelection ({ handleNextStepNav }) {
-    const { reportRawData, selectedPlayer } = useContext(AppContext)
+    const { playerCastsRawData, selectedPlayer } = useContext(AppContext)
 
     const [selectedSkills, setSelectedSkills] = useState([])
 
@@ -24,8 +23,8 @@ function SkillsSelection ({ handleNextStepNav }) {
     }, [selectedSkills])
 
     const skillsList = useMemo(() =>
-            extractPlayerSkills(reportRawData, selectedPlayer.id),
-        [reportRawData, selectedPlayer])
+            extractPlayerSkills(playerCastsRawData, selectedPlayer.id),
+        [playerCastsRawData, selectedPlayer])
 
     const handleOnSkillSelect = useCallback(() =>
         handleNextStepNav(selectedSkills), [handleNextStepNav, selectedSkills])

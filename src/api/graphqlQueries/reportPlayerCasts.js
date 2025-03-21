@@ -1,8 +1,8 @@
-const getQuery = ({ reportId, fightId }) => `
+const getQuery = ({ reportId, fightId, playerId }) => `
     query {
       reportData {
         report(code: "${reportId}") {
-          events(fightIDs: [${fightId}], dataType: Casts, limit: 100000) {
+          events(fightIDs: [${fightId}], sourceID: ${playerId}, dataType: Casts, limit: 100000) {
             data
           }
           fights(fightIDs: [${fightId}]) {

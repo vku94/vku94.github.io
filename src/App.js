@@ -4,8 +4,9 @@ import _ from 'lodash'
 import Loader from './components/Loader'
 import AppContext, { AppProvider } from './providers/appProvider'
 import { InitStep, PlayersSelection, SkillsSelection, Note } from './screens'
-import getReportCastsQuery from './api/graphqlQueries/reportCasts'
+import getReportPlayersQuery from './api/graphqlQueries/reportPlayers'
 import getReportFightsQuery from './api/graphqlQueries/reportFights'
+import getReportPlayerCastsQuery from './api/graphqlQueries/reportPlayerCasts'
 import parseUrl from './utils/parseUrl'
 import query from './api/query'
 import { SCREEN } from './constants'
@@ -17,39 +18,50 @@ function Main () {
         isLoading,
         setIsLoading,
         currentScreen,
+        reportId,
+        setReportId,
+        fightId,
+        setFightId,
         setCurrentScreen,
         setReportRawData,
+        setPlayerCastsRawData,
         setSelectedPlayer,
         setSelectedSkills
     } = useContext(AppContext)
 
     const getReportInfo = useCallback(async (reportUrl) => {
         setIsLoading(true)
-        const { reportId, fightId: fId } = parseUrl(reportUrl)
+        const { reportId: rId, fightId: fId } = parseUrl(reportUrl)
 
-        let fightId = fId
+        let _fightId = fId
 
         if (fId === 'last') {
-            const q = getReportFightsQuery({ reportId })
+            const q = getReportFightsQuery({ reportId: rId })
             const res = await query(q)
             const fights = _.get(res, 'data.reportData.report.fights', [])
             const lastFight = fights.at(-1) || {}
-            fightId = lastFight.id
+            _fightId = lastFight.id
         }
 
-        const q = getReportCastsQuery({ reportId, fightId })
+        setFightId(fId)
+        setReportId(rId)
+
+        const q = getReportPlayersQuery({ reportId: rId, fightId: _fightId })
         const res = await query(q)
         setReportRawData(res)
         setCurrentScreen(SCREEN.PLAYER_SELECT)
         setIsLoading(false)
     }, [])
 
-    const selectPlayer = useCallback((player) => {
+    const selectPlayer = useCallback(async (player) => {
         setIsLoading(true)
+        const q = getReportPlayerCastsQuery({ reportId, fightId, playerId: player.id })
+        const res = await query(q)
         setSelectedPlayer(player)
+        setPlayerCastsRawData(res)
         setCurrentScreen(SCREEN.SKILLS_SELECT)
         setIsLoading(false)
-    }, [])
+    }, [reportId, fightId])
 
     const selectSkills = useCallback((skills) => {
         setIsLoading(true)
