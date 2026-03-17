@@ -1,29 +1,29 @@
 {
-   "name": "MRT-note-creator",
-   "version": "0.0.1",
-   "description": "",
-   "keywords": [],
-   "license": "ISC",
-   "author": "vku@dbbsoftware.com",
-   "main": "index.js",
-   "type": "module",
-   "scripts": {
-      "dev": "cp templates/index.html index.html && preact-scripts start",
-      "build": "rm -r static && cp templates/index.html index.html && preact-scripts build && cp -r build/* ."
-   },
-   "engines": {
-      "node": "20.18.2",
-      "npm": "10.8.2"
-   },
-   "dependencies": {
-      "lodash": "^4.17.21",
-      "preact": "^10.26.2"
-   },
-   "devDependencies": {
-      "file-loader": "^6.2.0",
-      "preact-scripts": "0.3.0-alpha"
-   },
-   "eslintConfig": {
-      "extends": "./node_modules/preact-scripts/config/eslint.js"
-   }
+  "name": "MRT-note-creator",
+  "version": "0.0.2",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "vku@dbbsoftware.com",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "cp templates/index.html index.html && preact-scripts start",
+    "build": "rm -r static && cp templates/index.html index.html && preact-scripts build && cp -r build/* ."
+  },
+  "engines": {
+    "node": "20.18.2",
+    "npm": "10.8.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "preact": "^10.26.2"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "preact-scripts": "0.3.0-alpha"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/preact-scripts/config/eslint.js"
+  }
 }
