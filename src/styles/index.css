@@ -1,10 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-body, .app, .root {
+body,
+.app,
+.root {
   min-height: 100vh;
 }
 
@@ -58,9 +60,16 @@ body, .app, .root {
   user-select: none;
 }
 
-
 .list-container {
   display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.list-container-column {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   flex-wrap: wrap;
   padding: 0 20px;
