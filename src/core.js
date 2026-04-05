@@ -43,8 +43,7 @@ export const generateViserioNote = (
   return (
     `EncounterID:${BOSS_ENCOUNTERS[boss]};Name:${Object.entries(BOSSES).find(([, value]) => value === boss)[0]}\n` +
     casts.reduce((p, c) => {
-      const timeParsed = convertSeconds(c.time);
-      const row = `time:${timeParsed};ph:1;tag:${playerName};spellid:${c.skillId};`;
+      const row = `time:${c.time};ph:1;tag:${playerName};spellid:${c.skillId};`;
       return p + row + "\n";
     }, "")
   );
